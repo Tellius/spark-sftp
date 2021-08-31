@@ -141,7 +141,7 @@ class DefaultSource extends RelationProvider with SchemaRelationProvider with Cr
       val filePath = hdfsTemp + "/" + hdfsPath.getName
       logger.info(s"Copying from local file ${fileLocation} to HDFS ${filePath}")
       fs.copyFromLocalFile(new Path(fileLocation), new Path(filePath))
-      fs.deleteOnExit(new Path(filePath))
+      //fs.deleteOnExit(new Path(filePath))
       return filePath
     } else {
       return fileLocation
@@ -155,7 +155,7 @@ class DefaultSource extends RelationProvider with SchemaRelationProvider with Cr
     val fs = hdfsPath.getFileSystem(hadoopConf)
     if ("hdfs".equalsIgnoreCase(fs.getScheme)) {
       fs.copyToLocalFile(new Path(hdfsTemp), new Path(fileLocation))
-      fs.deleteOnExit(new Path(hdfsTemp))
+      //fs.deleteOnExit(new Path(hdfsTemp))
       return fileLocation
     } else {
       return hdfsTemp
